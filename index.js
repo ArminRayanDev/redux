@@ -1,18 +1,13 @@
-const Redux = require("redux");
-
-const depositReducer = (state = { balance: 0 }, action) => {
-  console.log("hey there!!!!");
-  state.balance = state.balance + 10000;
-  return state;
-};
+const { getState, dispatch, subscribe } = require("./store");
+const { withdrawAction, depositAction } = require("./store/actions/account");
 
 const subscriber = () => {
-  const latestState = store.getState();
-  console.log(latestState);
+  const { client, account } = getState();
+  console.log(account);
 };
 
-const store = Redux.createStore(depositReducer);
+subscribe(subscriber);
 
-store.subscribe(subscriber);
+dispatch(withdrawAction(50000));
 
-store.dispatch({ type: "" });
+dispatch(depositAction(10000));
